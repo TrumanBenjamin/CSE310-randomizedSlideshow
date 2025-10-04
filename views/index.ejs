@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include ('_head') %>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Randomized slideshow from my project's database:</h1>
+
+    <!-- simple slideshow container -->
+    <div class="slideshow" id="slideshow">
+      <% photos.forEach((p, i) => { %>
+        <img
+          class="slide <%= i === 0 ? 'is-active' : '' %>"
+          src="<%= p.url %>"
+          alt="<%= p.alt %>"
+          loading="lazy"
+        />
+      <% }) %>
+    </div>
+
+    <div class="dots" id="dots">
+      <% photos.forEach((_, i) => { %>
+        <button class="dot <%= i === 0 ? 'is-active' : '' %>" data-idx="<%= i %>"></button>
+      <% }) %>
+    </div>
+  </main>
+
+  <script src="/js/slideshow.js"></script>
+</body>
+</html>
