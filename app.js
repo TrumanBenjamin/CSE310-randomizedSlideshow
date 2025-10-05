@@ -31,10 +31,23 @@ app.get("/", async (req, res) => {
        ORDER BY RANDOM()
        LIMIT 5`
     );
+
+    // throw an exception
+    if (!rows || rows.length === 0) {
+      throw new Error("No images found in the database!");
+    }
+
     res.render("index", { photos: rows });
+
   } catch (err) {
-    console.error(err);
-    res.status(500).send("DB error");
+    // handle errors
+    console.error("❌ Error loading images:", err.message);
+
+    // error message
+    res.status(500).send(`
+      <h1>Something went wrong</h1>
+      <p>${err.message}</p>
+    `);
   }
 });
 
